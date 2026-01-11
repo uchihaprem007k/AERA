@@ -53,7 +53,7 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
     onNoteChange?.(newNote);
   };
 
-  const stopPropagation = (e: React.MouseEvent | React.TouchEvent | React.ChangeEvent) => {
+  const stopAllEvents = (e: React.SyntheticEvent) => {
     e.stopPropagation();
     e.preventDefault();
   };
@@ -121,7 +121,6 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary relative z-10"
             style={{
               background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
-              pointerEvents: "auto",
             }}
           />
         </div>

@@ -334,21 +334,43 @@ export default function BurnoutPage() {
         onClose={() => setEditingBurnout(false)}
         title="Assess Your Burnout Risk"
       >
-        <div className="space-y-6">
-          <div>
+        <div 
+          className="space-y-6"
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+          >
             <label className="block text-sm font-medium mb-4">
               How close to burnout do you feel?
             </label>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={burnoutRisk}
-              onChange={(e) => {
-                setBurnoutRisk(parseInt(e.target.value));
-              }}
-              className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
-            />
+            <div
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+            >
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={burnoutRisk}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  setBurnoutRisk(parseInt(e.target.value));
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+              />
+            </div>
             <div className="flex justify-between text-xs text-muted-foreground mt-2">
               <span>Low Risk</span>
               <span className="text-lg font-bold text-primary">{burnoutRisk}%</span>
@@ -369,9 +391,13 @@ export default function BurnoutPage() {
           </div>
           
           <motion.button
+            type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => setEditingBurnout(false)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditingBurnout(false);
+            }}
             className="w-full px-4 py-3 bg-primary text-primary-foreground rounded-xl font-medium"
           >
             Save Assessment

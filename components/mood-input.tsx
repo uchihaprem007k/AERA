@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Smile, Frown, Meh } from "lucide-react";
 
@@ -27,7 +27,6 @@ const emotionTags = [
 export function MoodInput({ value, onChange, onNoteChange, note = "", date, showEmotions = true }: MoodInputProps) {
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [localNote, setLocalNote] = useState(note);
-  const sliderRef = useRef<HTMLInputElement>(null);
 
   const getMoodIcon = (mood: number) => {
     if (mood >= 70) return <Smile className="w-6 h-6" />;
@@ -53,24 +52,10 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
     onNoteChange?.(newNote);
   };
 
-  const stopAllEvents = (e: React.SyntheticEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
   return (
-    <div 
-      className="space-y-6"
-      onClick={(e) => e.stopPropagation()}
-      onMouseDown={(e) => e.stopPropagation()}
-      onTouchStart={(e) => e.stopPropagation()}
-    >
+    <div className="space-y-6">
       {/* Mood Slider */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-      >
+      <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">How are you feeling?</label>
           <div className="flex items-center gap-2">
@@ -78,52 +63,17 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             <span className={`text-2xl font-bold ${getMoodColor(value)}`}>{value}</span>
           </div>
         </div>
-        <div
-          onClick={(e) => e.stopPropagation()}
-          onMouseDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
-          className="relative"
-        >
-          <input
-            ref={sliderRef}
-            type="range"
-            min="0"
-            max="100"
-            value={value}
-            onChange={(e) => {
-              e.stopPropagation();
-              onChange(parseInt(e.target.value));
-            }}
-            onInput={(e) => {
-              e.stopPropagation();
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseMove={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseUp={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchStart={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchMove={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchEnd={(e) => {
-              e.stopPropagation();
-            }}
-            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary relative z-10"
-            style={{
-              background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
-            }}
-          />
-        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={(e) => onChange(parseInt(e.target.value))}
+          className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+          style={{
+            background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
+          }}
+        />
         <div className="flex justify-between text-xs text-muted-foreground mt-2">
           <span>Very Low</span>
           <span>Neutral</span>
@@ -133,11 +83,7 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
 
       {/* Emotion Tags */}
       {showEmotions && (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          onMouseDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
-        >
+        <div>
           <label className="text-sm font-medium mb-3 block">How would you describe this feeling?</label>
           <div className="flex flex-wrap gap-2">
             {emotionTags.map((emotion) => (
@@ -146,16 +92,7 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
                 type="button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleEmotion(emotion.label);
-                }}
-                onMouseDown={(e) => {
-                  e.stopPropagation();
-                }}
-                onTouchStart={(e) => {
-                  e.stopPropagation();
-                }}
+                onClick={() => toggleEmotion(emotion.label)}
                 className={`px-3 py-1.5 rounded-lg text-sm border transition-all ${
                   selectedEmotions.includes(emotion.label)
                     ? `${emotion.color} border-current`
@@ -170,30 +107,11 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
       )}
 
       {/* Note */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-      >
+      <div>
         <label className="text-sm font-medium mb-2 block">Want to add a note? (Optional)</label>
         <textarea
           value={localNote}
-          onChange={(e) => {
-            e.stopPropagation();
-            handleNoteChange(e.target.value);
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-          }}
-          onFocus={(e) => {
-            e.stopPropagation();
-          }}
-          onTouchStart={(e) => {
-            e.stopPropagation();
-          }}
+          onChange={(e) => handleNoteChange(e.target.value)}
           placeholder="What's contributing to how you feel today?"
           className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary resize-none"
           rows={3}

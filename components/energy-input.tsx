@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Battery, Zap } from "lucide-react";
 
@@ -23,7 +23,6 @@ export function EnergyInput({
 }: EnergyInputProps) {
   const [localNote, setLocalNote] = useState(note);
   const [localPeakTime, setLocalPeakTime] = useState(peakTime);
-  const sliderRef = useRef<HTMLInputElement>(null);
 
   const getEnergyLevel = (energy: number) => {
     if (energy >= 70) return { label: "High", color: "text-green-500" };
@@ -44,18 +43,9 @@ export function EnergyInput({
   };
 
   return (
-    <div 
-      className="space-y-6"
-      onClick={(e) => e.stopPropagation()}
-      onMouseDown={(e) => e.stopPropagation()}
-      onTouchStart={(e) => e.stopPropagation()}
-    >
+    <div className="space-y-6">
       {/* Energy Slider */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-      >
+      <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">What's your energy level?</label>
           <div className="flex items-center gap-2">
@@ -64,50 +54,17 @@ export function EnergyInput({
             <span className={`text-sm ${energyLevel.color}`}>({energyLevel.label})</span>
           </div>
         </div>
-        <div
-          onClick={(e) => e.stopPropagation()}
-          onMouseDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
-          className="relative"
-        >
-          <input
-            ref={sliderRef}
-            type="range"
-            min="0"
-            max="100"
-            value={value}
-            onChange={(e) => {
-              e.stopPropagation();
-              onChange(parseInt(e.target.value));
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseMove={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseUp={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchStart={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchMove={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchEnd={(e) => {
-              e.stopPropagation();
-            }}
-            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary relative z-10"
-            style={{
-              background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
-            }}
-          />
-        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={(e) => onChange(parseInt(e.target.value))}
+          className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+          style={{
+            background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
+          }}
+        />
         <div className="flex justify-between text-xs text-muted-foreground mt-2">
           <span>Exhausted</span>
           <span>Moderate</span>
@@ -117,11 +74,7 @@ export function EnergyInput({
 
       {/* Peak Time */}
       {onPeakTimeChange && (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          onMouseDown={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
-        >
+        <div>
           <label className="text-sm font-medium mb-2 block flex items-center gap-2">
             <Zap className="w-4 h-4" />
             When did you feel most energized today?
@@ -129,42 +82,18 @@ export function EnergyInput({
           <input
             type="time"
             value={localPeakTime}
-            onChange={(e) => {
-              e.stopPropagation();
-              handlePeakTimeChange(e.target.value);
-            }}
-            onClick={(e) => e.stopPropagation()}
-            onFocus={(e) => e.stopPropagation()}
+            onChange={(e) => handlePeakTimeChange(e.target.value)}
             className="w-full px-4 py-2 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
       )}
 
       {/* Note */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-      >
+      <div>
         <label className="text-sm font-medium mb-2 block">What affected your energy today? (Optional)</label>
         <textarea
           value={localNote}
-          onChange={(e) => {
-            e.stopPropagation();
-            handleNoteChange(e.target.value);
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-          }}
-          onFocus={(e) => {
-            e.stopPropagation();
-          }}
-          onTouchStart={(e) => {
-            e.stopPropagation();
-          }}
+          onChange={(e) => handleNoteChange(e.target.value)}
           placeholder="Sleep quality, stress, activities, etc."
           className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary resize-none"
           rows={3}

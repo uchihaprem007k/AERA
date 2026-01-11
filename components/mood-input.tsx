@@ -68,7 +68,11 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
           min="0"
           max="100"
           value={value}
-          onChange={(e) => onChange(parseInt(e.target.value))}
+          onChange={(e) => {
+            e.stopPropagation();
+            onChange(parseInt(e.target.value));
+          }}
+          onClick={(e) => e.stopPropagation()}
           className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
           style={{
             background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
@@ -89,9 +93,14 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             {emotionTags.map((emotion) => (
               <motion.button
                 key={emotion.label}
+                type="button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => toggleEmotion(emotion.label)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleEmotion(emotion.label);
+                }}
                 className={`px-3 py-1.5 rounded-lg text-sm border transition-all ${
                   selectedEmotions.includes(emotion.label)
                     ? `${emotion.color} border-current`
@@ -110,7 +119,11 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
         <label className="text-sm font-medium mb-2 block">Want to add a note? (Optional)</label>
         <textarea
           value={localNote}
-          onChange={(e) => handleNoteChange(e.target.value)}
+          onChange={(e) => {
+            e.stopPropagation();
+            handleNoteChange(e.target.value);
+          }}
+          onClick={(e) => e.stopPropagation()}
           placeholder="What's contributing to how you feel today?"
           className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary resize-none"
           rows={3}

@@ -259,33 +259,33 @@ export default function SelfAwarenessPage() {
         <MoodInput
           value={selectedDate ? (getMood(selectedDate)?.value || avgMood) : (todayMood?.value || avgMood)}
           onChange={(value) => {
-            if (selectedDate) {
-              const existing = getMood(selectedDate);
-              handleMoodUpdate(selectedDate, value, existing?.note, existing?.emotions);
-            }
+            const date = selectedDate || new Date().toISOString().split("T")[0];
+            const existing = getMood(date);
+            handleMoodUpdate(date, value, existing?.note, existing?.emotions);
           }}
           onNoteChange={(note) => {
-            if (selectedDate) {
-              const existing = getMood(selectedDate);
-              handleMoodUpdate(selectedDate, existing?.value || avgMood, note, existing?.emotions);
-            }
+            const date = selectedDate || new Date().toISOString().split("T")[0];
+            const existing = getMood(date);
+            handleMoodUpdate(date, existing?.value || avgMood, note, existing?.emotions);
           }}
           note={selectedDate ? (getMood(selectedDate)?.note || "") : (todayMood?.note || "")}
           date={selectedDate || undefined}
         />
         <motion.button
+          type="button"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => {
-            if (selectedDate) {
-              const existing = getMood(selectedDate);
-              handleMoodUpdate(
-                selectedDate,
-                existing?.value || avgMood,
-                existing?.note,
-                existing?.emotions
-              );
-            }
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const date = selectedDate || new Date().toISOString().split("T")[0];
+            const existing = getMood(date);
+            handleMoodUpdate(
+              date,
+              existing?.value || avgMood,
+              existing?.note,
+              existing?.emotions
+            );
           }}
           className="w-full mt-6 px-4 py-3 bg-primary text-primary-foreground rounded-xl font-medium"
         >

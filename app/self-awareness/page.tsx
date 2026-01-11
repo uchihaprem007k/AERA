@@ -286,6 +286,9 @@ export default function SelfAwarenessPage() {
               existing?.note,
               existing?.emotions
             );
+            // Close modal after save
+            setEditingMood(null);
+            setSelectedDate(null);
           }}
           className="w-full mt-6 px-4 py-3 bg-primary text-primary-foreground rounded-xl font-medium"
         >

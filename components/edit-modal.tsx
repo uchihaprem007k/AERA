@@ -16,21 +16,14 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
+    // Only prevent body scroll, no auto-close handlers
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = originalOverflow;
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (typeof window === "undefined") return null;
 
@@ -38,12 +31,11 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-          {/* Backdrop */}
+          {/* Backdrop - NO onClick handler */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
           />
 
@@ -53,7 +45,6 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            onClick={(e) => e.stopPropagation()}
             className="relative z-10 bg-gradient-to-br from-card to-card/50 border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col"
           >
             <div className="sticky top-0 bg-card/95 backdrop-blur-sm border-b border-border px-6 py-4 flex items-center justify-between flex-shrink-0 z-10">

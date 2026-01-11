@@ -11,16 +11,16 @@ interface EditModalProps {
 }
 
 export function EditModal({ isOpen, onClose, title, children }: EditModalProps) {
-  const handleBackdropClick = (e: React.MouseEvent) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only close if clicking directly on the backdrop, not on modal content
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  const handleBackdropMouseDown = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      e.preventDefault();
-    }
+  const handleModalClick = (e: React.MouseEvent) => {
+    // Prevent clicks inside modal from bubbling to backdrop
+    e.stopPropagation();
   };
 
   return (
@@ -29,14 +29,19 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           onClick={handleBackdropClick}
-          onMouseDown={handleBackdropMouseDown}
+          onMouseDown={(e) => {
+            // Prevent backdrop from closing on mouse down
+            if (e.target !== e.currentTarget) {
+              e.preventDefault();
+            }
+          }}
         >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm pointer-events-auto"
           />
 
           {/* Modal */}
@@ -45,13 +50,10 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-            }}
-            className="relative z-50 bg-gradient-to-br from-card to-card/50 border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col"
+            onClick={handleModalClick}
+            onMouseDown={handleModalClick}
+            onTouchStart={handleModalClick}
+            className="relative z-[60] bg-gradient-to-br from-card to-card/50 border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col pointer-events-auto"
           >
             <div className="sticky top-0 bg-card/95 backdrop-blur-sm border-b border-border px-6 py-4 flex items-center justify-between flex-shrink-0">
               <h2 className="text-xl font-bold">{title}</h2>
@@ -72,8 +74,9 @@ export function EditModal({ isOpen, onClose, title, children }: EditModalProps) 
 
             <div 
               className="p-6 overflow-y-auto flex-1"
-              onClick={(e) => e.stopPropagation()}
-              onMouseDown={(e) => e.stopPropagation()}
+              onClick={handleModalClick}
+              onMouseDown={handleModalClick}
+              onTouchStart={handleModalClick}
             >
               {children}
             </div>

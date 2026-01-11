@@ -53,9 +53,9 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
   };
 
   return (
-    <div className="space-y-6" onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+    <div className="space-y-6">
       {/* Mood Slider */}
-      <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+      <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">How are you feeling?</label>
           <div className="flex items-center gap-2">
@@ -63,7 +63,12 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             <span className={`text-2xl font-bold ${getMoodColor(value)}`}>{value}</span>
           </div>
         </div>
-        <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+        <div 
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <input
             type="range"
             min="0"
@@ -86,7 +91,7 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             onTouchMove={(e) => {
               e.stopPropagation();
             }}
-            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none"
+            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
             style={{
               background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
             }}
@@ -101,7 +106,11 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
 
       {/* Emotion Tags */}
       {showEmotions && (
-        <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           <label className="text-sm font-medium mb-3 block">How would you describe this feeling?</label>
           <div className="flex flex-wrap gap-2">
             {emotionTags.map((emotion) => (
@@ -119,6 +128,10 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
                   e.preventDefault();
                   e.stopPropagation();
                 }}
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
                 className={`px-3 py-1.5 rounded-lg text-sm border transition-all ${
                   selectedEmotions.includes(emotion.label)
                     ? `${emotion.color} border-current`
@@ -133,7 +146,11 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
       )}
 
       {/* Note */}
-      <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+      >
         <label className="text-sm font-medium mb-2 block">Want to add a note? (Optional)</label>
         <textarea
           value={localNote}
@@ -148,6 +165,9 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             e.stopPropagation();
           }}
           onFocus={(e) => {
+            e.stopPropagation();
+          }}
+          onTouchStart={(e) => {
             e.stopPropagation();
           }}
           placeholder="What's contributing to how you feel today?"

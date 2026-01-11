@@ -43,9 +43,9 @@ export function EnergyInput({
   };
 
   return (
-    <div className="space-y-6" onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+    <div className="space-y-6">
       {/* Energy Slider */}
-      <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+      <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">What's your energy level?</label>
           <div className="flex items-center gap-2">
@@ -54,35 +54,17 @@ export function EnergyInput({
             <span className={`text-sm ${energyLevel.color}`}>({energyLevel.label})</span>
           </div>
         </div>
-        <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={value}
-            onChange={(e) => {
-              e.stopPropagation();
-              onChange(parseInt(e.target.value));
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchStart={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchMove={(e) => {
-              e.stopPropagation();
-            }}
-            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none"
-            style={{
-              background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
-            }}
-          />
-        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={(e) => onChange(parseInt(e.target.value))}
+          className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+          style={{
+            background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
+          }}
+        />
         <div className="flex justify-between text-xs text-muted-foreground mt-2">
           <span>Exhausted</span>
           <span>Moderate</span>

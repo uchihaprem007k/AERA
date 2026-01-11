@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Smile, Frown, Meh, Heart } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { Smile, Frown, Meh } from "lucide-react";
 
 interface MoodInputProps {
   value: number;
@@ -27,6 +27,7 @@ const emotionTags = [
 export function MoodInput({ value, onChange, onNoteChange, note = "", date, showEmotions = true }: MoodInputProps) {
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [localNote, setLocalNote] = useState(note);
+  const sliderRef = useRef<HTMLInputElement>(null);
 
   const getMoodIcon = (mood: number) => {
     if (mood >= 70) return <Smile className="w-6 h-6" />;
@@ -52,10 +53,24 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
     onNoteChange?.(newNote);
   };
 
+  const stopPropagation = (e: React.MouseEvent | React.TouchEvent | React.ChangeEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
-    <div className="space-y-6">
+    <div 
+      className="space-y-6"
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
+    >
       {/* Mood Slider */}
-      <div>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">How are you feeling?</label>
           <div className="flex items-center gap-2">
@@ -63,13 +78,14 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             <span className={`text-2xl font-bold ${getMoodColor(value)}`}>{value}</span>
           </div>
         </div>
-        <div 
+        <div
           onClick={(e) => e.stopPropagation()}
           onMouseDown={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
-          onTouchMove={(e) => e.stopPropagation()}
+          className="relative"
         >
           <input
+            ref={sliderRef}
             type="range"
             min="0"
             max="100"
@@ -78,11 +94,19 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
               e.stopPropagation();
               onChange(parseInt(e.target.value));
             }}
+            onInput={(e) => {
+              e.stopPropagation();
+            }}
             onClick={(e) => {
-              e.preventDefault();
               e.stopPropagation();
             }}
             onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
+            onMouseMove={(e) => {
+              e.stopPropagation();
+            }}
+            onMouseUp={(e) => {
               e.stopPropagation();
             }}
             onTouchStart={(e) => {
@@ -91,9 +115,13 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
             onTouchMove={(e) => {
               e.stopPropagation();
             }}
-            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+            }}
+            className="w-full h-3 bg-muted rounded-lg appearance-none cursor-pointer accent-primary relative z-10"
             style={{
               background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${value}%, hsl(var(--muted)) ${value}%, hsl(var(--muted)) 100%)`,
+              pointerEvents: "auto",
             }}
           />
         </div>
@@ -120,16 +148,13 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
-                  e.preventDefault();
                   e.stopPropagation();
                   toggleEmotion(emotion.label);
                 }}
                 onMouseDown={(e) => {
-                  e.preventDefault();
                   e.stopPropagation();
                 }}
                 onTouchStart={(e) => {
-                  e.preventDefault();
                   e.stopPropagation();
                 }}
                 className={`px-3 py-1.5 rounded-lg text-sm border transition-all ${
@@ -182,4 +207,3 @@ export function MoodInput({ value, onChange, onNoteChange, note = "", date, show
     </div>
   );
 }
-

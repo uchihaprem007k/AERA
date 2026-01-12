@@ -23,7 +23,7 @@ export const useEnergyStore = create<EnergyStore>((set, get) => ({
   initializeEnergies: () => {
     if (get().energies.length === 0) {
       const today = format(new Date(), "yyyy-MM-dd");
-      const initialEnergies = mockData.energy.map((e) => ({
+      const initialEnergies: EnergyEntry[] = mockData.energy.map((e) => ({
         date: e.date,
         value: e.value,
         note: undefined,

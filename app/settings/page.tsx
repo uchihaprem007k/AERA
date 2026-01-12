@@ -156,7 +156,7 @@ export default function SettingsPage() {
         <div className="space-y-2 text-sm text-muted-foreground">
           <p>Version 1.0.0</p>
           <p>AERA is your personal intelligence layer for mental health and self-understanding.</p>
-          <p>Built with care for normal humans navigating life's complexities.</p>
+          <p>Built with care for normal humans navigating life&apos;s complexities.</p>
         </div>
       </motion.div>
     </div>

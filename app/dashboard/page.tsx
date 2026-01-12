@@ -304,7 +304,7 @@ export default function DashboardPage() {
           className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
         >
           <Plus className="w-5 h-5" />
-          Update Today's Data
+          Update Today&apos;s Data
         </motion.button>
       </motion.div>
       
@@ -355,7 +355,7 @@ export default function DashboardPage() {
       <EditModal
         isOpen={editingMetric === "update-today"}
         onClose={() => setEditingMetric(null)}
-        title="Update Today's Data"
+        title="Update Today&apos;s Data"
       >
         <div className="space-y-6">
           <div>
@@ -585,7 +585,7 @@ export default function DashboardPage() {
           <InsightCard
             id="task-completion"
             title="Task Completion"
-            description={`You've completed ${completedTasks} tasks. Keep up the momentum!`}
+            description={`You&apos;ve completed ${completedTasks} tasks. Keep up the momentum!`}
             details="Consistent task completion builds momentum and reduces mental load. Celebrate small wins to maintain motivation."
             icon={CheckCircle2}
           />

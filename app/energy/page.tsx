@@ -93,7 +93,7 @@ export default function EnergyPage() {
           className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all"
         >
           <Plus className="w-4 h-4" />
-          Log Today's Energy
+          Log Today&apos;s Energy
         </motion.button>
       </motion.div>
       

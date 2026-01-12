@@ -128,7 +128,7 @@ export default function LifeSituationsPage() {
                     <p className="text-sm text-muted-foreground">{situation.description}</p>
                     {appliesToMe[situation.id] && (
                       <div className="mt-3 p-3 bg-primary/10 border border-primary/20 rounded-lg">
-                        <p className="text-sm text-primary font-medium">You've marked this as relevant to you.</p>
+                        <p className="text-sm text-primary font-medium">You&apos;ve marked this as relevant to you.</p>
                       </div>
                     )}
                   </div>

@@ -83,7 +83,7 @@ export default function SelfAwarenessPage() {
           className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all"
         >
           <Plus className="w-4 h-4" />
-          Log Today's Mood
+          Log Today&apos;s Mood
         </motion.button>
       </motion.div>
 
@@ -254,7 +254,7 @@ export default function SelfAwarenessPage() {
           setEditingMood(null);
           setSelectedDate(null);
         }}
-        title={selectedDate === new Date().toISOString().split("T")[0] ? "Log Today's Mood" : `Edit Mood for ${selectedDate ? new Date(selectedDate).toLocaleDateString() : ""}`}
+        title={selectedDate === new Date().toISOString().split("T")[0] ? "Log Today&apos;s Mood" : `Edit Mood for ${selectedDate ? new Date(selectedDate).toLocaleDateString() : ""}`}
       >
         <MoodInput
           value={selectedDate ? (getMood(selectedDate)?.value || avgMood) : (todayMood?.value || avgMood)}

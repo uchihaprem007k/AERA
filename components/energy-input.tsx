@@ -47,7 +47,7 @@ export function EnergyInput({
       {/* Energy Slider */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <label className="text-sm font-medium">What's your energy level?</label>
+          <label className="text-sm font-medium">What&apos;s your energy level?</label>
           <div className="flex items-center gap-2">
             <Battery className="w-6 h-6" />
             <span className={`text-2xl font-bold ${energyLevel.color}`}>{value}%</span>

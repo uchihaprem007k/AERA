@@ -268,7 +268,7 @@ export default function MentalLoadPage() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-2">What's contributing? (Optional)</label>
+            <label className="block text-sm font-medium mb-2">What&apos;s contributing? (Optional)</label>
             <textarea
               value={loadNote}
               onChange={(e) => setLoadNote(e.target.value)}

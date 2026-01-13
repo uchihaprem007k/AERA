@@ -305,9 +305,9 @@ export default function EducationPage() {
             <h3 className="font-semibold mb-2">About This Section</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               This section provides educational information to help you understand common mental health experiences. 
-              It's not medical advice, diagnosis, or treatment. If you're struggling significantly, consider talking 
-              to a mental health professional. Understanding what you're experiencing can be the first step toward 
-              feeling better, but it's not a substitute for professional support when needed.
+              It&apos;s not medical advice, diagnosis, or treatment. If you&apos;re struggling significantly, consider talking 
+              to a mental health professional. Understanding what you&apos;re experiencing can be the first step toward 
+              feeling better, but it&apos;s not a substitute for professional support when needed.
             </p>
           </div>
         </div>

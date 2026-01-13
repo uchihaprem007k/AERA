@@ -123,7 +123,7 @@ export default function SleepRecoveryPage() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-card border border-border rounded-xl p-6 shadow-md"
         >
-          <h3 className="text-lg font-semibold mb-4">Today's Sleep Entry</h3>
+          <h3 className="text-lg font-semibold mb-4">Today&apos;s Sleep Entry</h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">Sleep Duration (hours)</label>
@@ -256,8 +256,8 @@ export default function SleepRecoveryPage() {
                 {avgDuration >= 7 && avgDuration <= 9
                   ? "Your sleep duration is in the optimal range (7-9 hours). This supports good recovery and cognitive function."
                   : avgDuration < 7
-                  ? "You're getting less than the recommended 7-9 hours. Consider going to bed 30 minutes earlier to improve recovery."
-                  : "You're sleeping more than 9 hours regularly. While rest is important, excessive sleep might indicate underlying fatigue or health issues."}
+                  ? "You&apos;re getting less than the recommended 7-9 hours. Consider going to bed 30 minutes earlier to improve recovery."
+                  : "You&apos;re sleeping more than 9 hours regularly. While rest is important, excessive sleep might indicate underlying fatigue or health issues."}
               </p>
             </div>
           </div>
@@ -267,7 +267,7 @@ export default function SleepRecoveryPage() {
               <p className="text-sm font-medium mb-1">Sleep Quality</p>
               <p className="text-sm text-muted-foreground">
                 {avgQuality >= 70
-                  ? "Your sleep quality is good. You're likely waking up feeling refreshed and ready for the day."
+                  ? "Your sleep quality is good. You&apos;re likely waking up feeling refreshed and ready for the day."
                   : avgQuality >= 50
                   ? "Your sleep quality is moderate. Consider improving your sleep environment: reduce screen time before bed, keep the room cool and dark."
                   : "Your sleep quality could be improved. Focus on creating a consistent bedtime routine and reducing stress before sleep."}
@@ -280,7 +280,7 @@ export default function SleepRecoveryPage() {
               <p className="text-sm font-medium mb-1">Recovery Pattern</p>
               <p className="text-sm text-muted-foreground">
                 {avgRecovery >= 70
-                  ? "Your recovery is strong. Your body is effectively restoring energy and processing the day's experiences."
+                  ? "Your recovery is strong. Your body is effectively restoring energy and processing the day&apos;s experiences."
                   : "Your recovery could be enhanced. Focus on consistent sleep schedules, stress management, and allowing time for rest during the day."}
               </p>
             </div>

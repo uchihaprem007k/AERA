@@ -137,7 +137,7 @@ export default function LifeBalancePage() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-card border border-border rounded-xl p-6 shadow-md space-y-6"
         >
-          <h3 className="text-lg font-semibold">Today's Balance Entry</h3>
+          <h3 className="text-lg font-semibold">Today&apos;s Balance Entry</h3>
 
           <div>
             <label className="block text-sm font-medium mb-4">
@@ -323,10 +323,10 @@ export default function LifeBalancePage() {
               <p className="text-sm font-medium mb-1">Work-Rest Balance</p>
               <p className="text-sm text-muted-foreground">
                 {Math.abs(avgWork - avgRest) < 10
-                  ? "You're maintaining a good balance between work and rest. This supports sustainable energy and prevents burnout."
+                  ? "You&apos;re maintaining a good balance between work and rest. This supports sustainable energy and prevents burnout."
                   : avgWork > avgRest + 10
-                  ? "You're spending significantly more time on work than rest. Consider scheduling more recovery time to maintain long-term wellbeing."
-                  : "You have more rest time than work time. This can be healthy if intentional, but ensure you're meeting your responsibilities."}
+                  ? "You&apos;re spending significantly more time on work than rest. Consider scheduling more recovery time to maintain long-term wellbeing."
+                  : "You have more rest time than work time. This can be healthy if intentional, but ensure you&apos;re meeting your responsibilities."}
               </p>
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function LifeBalancePage() {
               <p className="text-sm font-medium mb-1">Social Connection</p>
               <p className="text-sm text-muted-foreground">
                 {avgSocial >= 20
-                  ? "You're maintaining good social connections. Social time is important for emotional wellbeing and support."
+                  ? "You&apos;re maintaining good social connections. Social time is important for emotional wellbeing and support."
                   : "Your social time is lower. Consider making time for meaningful connections, even if brief."}
               </p>
             </div>
@@ -347,7 +347,7 @@ export default function LifeBalancePage() {
               <p className="text-sm font-medium mb-1">Personal Time</p>
               <p className="text-sm text-muted-foreground">
                 {avgPersonal >= 20
-                  ? "You're carving out time for yourself. Personal time is essential for self-care and maintaining your identity outside of roles."
+                  ? "You&apos;re carving out time for yourself. Personal time is essential for self-care and maintaining your identity outside of roles."
                   : "Your personal time could be increased. Even small amounts of time for yourself can significantly improve wellbeing."}
               </p>
             </div>

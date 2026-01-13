@@ -140,7 +140,7 @@ export default function StressPressurePage() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-card border border-border rounded-xl p-6 shadow-md space-y-6"
         >
-          <h3 className="text-lg font-semibold">Today's Stress Entry</h3>
+          <h3 className="text-lg font-semibold">Today&apos;s Stress Entry</h3>
 
           {/* Stress Level */}
           <div>
@@ -189,7 +189,7 @@ export default function StressPressurePage() {
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="What's contributing to your stress? How are you feeling?"
+              placeholder="What&apos;s contributing to your stress? How are you feeling?"
               className="w-full min-h-[100px] p-4 bg-muted/50 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
@@ -307,7 +307,7 @@ export default function StressPressurePage() {
                 {avgStress >= 70
                   ? "Your stress levels are consistently high. This is a signal that your system needs more support. Consider reducing commitments, increasing rest, and seeking support from others."
                   : avgStress >= 50
-                  ? "You're experiencing moderate stress, which is common in daily life. Focus on regular stress management practices to prevent it from escalating."
+                  ? "You&apos;re experiencing moderate stress, which is common in daily life. Focus on regular stress management practices to prevent it from escalating."
                   : "Your stress levels are manageable. Continue practicing stress management to maintain this balance."}
               </p>
             </div>
@@ -318,8 +318,8 @@ export default function StressPressurePage() {
               <div>
                 <p className="text-sm font-medium mb-1">Pressure Sources</p>
                 <p className="text-sm text-muted-foreground">
-                  You've identified {selectedSources.length} pressure source{selectedSources.length > 1 ? "s" : ""}. 
-                  Recognizing what's contributing to your stress is the first step toward managing it effectively.
+                  You&apos;ve identified {selectedSources.length} pressure source{selectedSources.length > 1 ? "s" : ""}. 
+                  Recognizing what&apos;s contributing to your stress is the first step toward managing it effectively.
                 </p>
               </div>
             </div>

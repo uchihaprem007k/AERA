@@ -116,7 +116,7 @@ export default function DailyCheckInPage() {
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Daily Check-in
           </h1>
-          <p className="text-muted-foreground">Take a moment to reflect on how you're feeling today</p>
+          <p className="text-muted-foreground">Take a moment to reflect on how you&apos;re feeling today</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -193,12 +193,12 @@ export default function DailyCheckInPage() {
       >
         <label className="block text-sm font-semibold mb-4 flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-primary" />
-          Today's Reflection (Optional)
+          Today&apos;s Reflection (Optional)
         </label>
         <textarea
           value={reflection}
           onChange={(e) => setReflection(e.target.value)}
-          placeholder="How are you feeling today? What's on your mind? What are you grateful for?"
+          placeholder="How are you feeling today? What&apos;s on your mind? What are you grateful for?"
           className="w-full min-h-[120px] p-4 bg-muted/50 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         />
         <p className="text-xs text-muted-foreground mt-2">
@@ -220,7 +220,7 @@ export default function DailyCheckInPage() {
           <p className="text-sm text-muted-foreground leading-relaxed">
             {mood < 40 && "Your mood is lower today. Consider what might be contributing and what small steps could help."}
             {energy < 40 && "Your energy is low. Rest and recovery are important—be gentle with yourself."}
-            {stress > 70 && "You're experiencing higher stress. Take time for deep breathing or a short break if possible."}
+            {stress > 70 && "You&apos;re experiencing higher stress. Take time for deep breathing or a short break if possible."}
           </p>
         </motion.div>
       )}
@@ -232,7 +232,7 @@ export default function DailyCheckInPage() {
         transition={{ delay: 0.3 }}
         className="bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 rounded-xl p-6"
       >
-        <h3 className="font-semibold mb-4">Today's Summary</h3>
+        <h3 className="font-semibold mb-4">Today&apos;s Summary</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div>
             <p className="text-xs text-muted-foreground mb-1">Mood</p>

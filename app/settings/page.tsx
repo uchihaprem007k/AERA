@@ -9,13 +9,13 @@ export default function SettingsPage() {
   const setTheme = useAppStore((state) => state.setTheme);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-4xl font-bold mb-2">Settings</h1>
-        <p className="text-muted-foreground">Customize your AERA experience</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Settings</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">Customize your HeartLyte experience</p>
       </motion.div>
 
       {/* Theme Settings */}
@@ -46,7 +46,7 @@ export default function SettingsPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setTheme(option.value)}
-                    className={`p-4 border-2 rounded-lg transition-all ${
+                    className={`p-4 border-2 rounded-lg transition-all min-h-[44px] ${
                       isSelected
                         ? "border-primary bg-primary/10"
                         : "border-border hover:border-primary/50"
@@ -151,11 +151,11 @@ export default function SettingsPage() {
       >
         <div className="flex items-center gap-3 mb-4">
           <SettingsIcon className="w-6 h-6 text-primary" />
-          <h2 className="text-xl font-semibold">About AERA</h2>
+          <h2 className="text-xl font-semibold">About HeartLyte</h2>
         </div>
         <div className="space-y-2 text-sm text-muted-foreground">
           <p>Version 1.0.0</p>
-          <p>AERA is your personal intelligence layer for mental health and self-understanding.</p>
+          <p>HeartLyte is your personal intelligence layer for mental health and self-understanding.</p>
           <p>Built with care for normal humans navigating life&apos;s complexities.</p>
         </div>
       </motion.div>

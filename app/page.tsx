@@ -49,7 +49,7 @@ export default function LandingPage() {
           transition={{ delay: 0.3 }}
           className="text-5xl font-bold text-foreground"
         >
-          AERA
+          HeartLyte
         </motion.h1>
 
         <motion.p

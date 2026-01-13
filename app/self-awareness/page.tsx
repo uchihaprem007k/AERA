@@ -61,17 +61,17 @@ export default function SelfAwarenessPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Self-Awareness
           </h1>
-          <p className="text-muted-foreground">Understanding your emotional patterns and inner landscape</p>
+          <p className="text-muted-foreground text-sm sm:text-base">Understanding your emotional patterns and inner landscape</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -80,15 +80,15 @@ export default function SelfAwarenessPage() {
             setSelectedDate(new Date().toISOString().split("T")[0]);
             setEditingMood("today");
           }}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all min-h-[44px] w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
-          Log Today&apos;s Mood
+          <span className="sm:inline">Log Today&apos;s Mood</span>
         </motion.button>
       </motion.div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -145,7 +145,7 @@ export default function SelfAwarenessPage() {
             <h3 className="text-lg font-semibold">Mood Timeline (30 days)</h3>
             <span className="text-xs text-muted-foreground">Click points to edit</span>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={timelineData}>
               <defs>
                 <linearGradient id="moodGradient" x1="0" y1="0" x2="0" y2="1">
@@ -192,7 +192,7 @@ export default function SelfAwarenessPage() {
         transition={{ delay: 0.4 }}
       >
         <h2 className="text-2xl font-semibold mb-4">Emotional Patterns</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {patterns.map((pattern, i) => (
             <motion.div
               key={i}

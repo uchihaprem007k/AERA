@@ -74,26 +74,26 @@ export default function EnergyPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Energy
           </h1>
-          <p className="text-muted-foreground">Understanding your energy patterns and peak performance times</p>
+          <p className="text-muted-foreground text-sm sm:text-base">Understanding your energy patterns and peak performance times</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setEditingEnergy(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all min-h-[44px] w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
-          Log Today&apos;s Energy
+          <span className="sm:inline">Log Today&apos;s Energy</span>
         </motion.button>
       </motion.div>
       
@@ -128,7 +128,7 @@ export default function EnergyPage() {
       </EditModal>
 
       {/* Current Energy */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -184,7 +184,7 @@ export default function EnergyPage() {
         className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
       >
         <h3 className="text-lg font-semibold mb-4">Daily Energy Curve</h3>
-        <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
           <AreaChart data={energyCurve}>
             <defs>
               <linearGradient id="energyGradient" x1="0" y1="0" x2="0" y2="1">
@@ -247,7 +247,7 @@ export default function EnergyPage() {
         transition={{ delay: 0.5 }}
       >
         <h2 className="text-2xl font-semibold mb-4">Fatigue Factors</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {fatigueFactors.map((factor, i) => (
             <motion.div
               key={i}

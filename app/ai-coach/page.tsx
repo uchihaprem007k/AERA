@@ -122,14 +122,14 @@ export default function AICoachPage() {
   };
 
   return (
-    <div className="flex flex-col" style={{ height: "calc(100vh - 12rem)" }}>
+    <div className="flex flex-col pb-8" style={{ minHeight: "calc(100vh - 12rem)" }}>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <h1 className="text-4xl font-bold mb-2">AI Coach</h1>
-        <p className="text-muted-foreground">Your intelligent companion for mental health insights</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">AI Coach</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">Your intelligent companion for mental health insights</p>
       </motion.div>
 
       {/* Chat Container */}
@@ -146,13 +146,13 @@ export default function AICoachPage() {
                 className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-4 ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-lg p-3 sm:p-4 ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted text-foreground"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
                 </div>
               </motion.div>
             ))}
@@ -189,7 +189,7 @@ export default function AICoachPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleSuggestedQuestion(question)}
-                  className="text-xs bg-muted hover:bg-muted/80 px-3 py-2 rounded-lg transition-colors"
+                  className="text-xs bg-muted hover:bg-muted/80 px-3 py-2 rounded-lg transition-colors min-h-[44px]"
                 >
                   {question}
                 </motion.button>
@@ -214,7 +214,7 @@ export default function AICoachPage() {
               whileTap={{ scale: 0.95 }}
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
-              className="p-2 bg-primary text-primary-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 bg-primary text-primary-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] min-w-[44px]"
             >
               <Send className="w-5 h-5" />
             </motion.button>

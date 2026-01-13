@@ -21,6 +21,7 @@ export default function DashboardPage() {
   const [editingMetric, setEditingMetric] = useState<string | null>(null);
   
   const tasks = useTaskStore((state) => state.tasks);
+  const initializeTasks = useTaskStore((state) => state.initializeTasks);
   const moods = useMoodStore((state) => state.moods);
   const updateMood = useMoodStore((state) => state.updateMood);
   const initializeMoods = useMoodStore((state) => state.initializeMoods);
@@ -31,7 +32,17 @@ export default function DashboardPage() {
   useEffect(() => {
     initializeMoods();
     initializeEnergies();
-  }, [initializeMoods, initializeEnergies]);
+    // Initialize tasks if empty
+    if (tasks.length === 0) {
+      const initialTasks = mockData.tasks.map((task) => ({
+        ...task,
+        difficulty: (task.priority === 3 ? "high" : task.priority === 2 ? "medium" : "low") as "low" | "medium" | "high",
+        estimatedEnergy: Math.floor(Math.random() * 40) + 30,
+        createdAt: task.dueDate || new Date().toISOString().split("T")[0],
+      }));
+      initializeTasks(initialTasks);
+    }
+  }, [initializeMoods, initializeEnergies, initializeTasks, tasks.length]);
   
   const todayMood = useMoodStore((state) => state.getTodayMood());
   const todayEnergy = useEnergyStore((state) => state.getTodayEnergy());
@@ -231,31 +242,31 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Dashboard
           </h1>
-          <p className="text-muted-foreground">Your mental health overview</p>
+          <p className="text-muted-foreground text-sm sm:text-base">Your mental health overview</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05, rotate: 180 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleRefresh}
-          className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg font-medium hover:bg-muted transition-colors"
+          className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg font-medium hover:bg-muted transition-colors min-h-[44px] w-full sm:w-auto"
         >
           <RefreshCw className="w-4 h-4" />
-          Refresh Data
+          <span className="sm:inline">Refresh Data</span>
         </motion.button>
       </motion.div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <StatCard
           title="Mood Score"
           value={avgMood}
@@ -301,7 +312,7 @@ export default function DashboardPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setEditingMetric("update-today")}
-          className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
+          className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all min-h-[44px] w-full sm:w-auto"
         >
           <Plus className="w-5 h-5" />
           Update Today&apos;s Data
@@ -405,7 +416,7 @@ export default function DashboardPage() {
       </EditModal>
 
       {/* Mixed Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Mood Trend - Area Chart */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -414,7 +425,7 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Mood Trend (30 days)</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={moodChartData}>
               <defs>
                 <linearGradient id="moodGradient" x1="0" y1="0" x2="0" y2="1">
@@ -439,7 +450,7 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Mood Distribution</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
                 data={moodDistribution}
@@ -470,7 +481,7 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Energy by Day of Week</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={energyByDayData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="day" />
@@ -489,7 +500,7 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Burnout Risk Trend</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <LineChart data={burnoutTrendData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
@@ -508,27 +519,35 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Task Status</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={taskStatusData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                outerRadius={100}
-                fill="#8884d8"
-                dataKey="value"
-                animationBegin={0}
-                animationDuration={800}
-              >
-                {taskStatusData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+          {totalTasks > 0 ? (
+            <ResponsiveContainer width="100%" height={250}>
+              <PieChart>
+                <Pie
+                  data={taskStatusData.filter(d => d.value > 0)}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                  animationBegin={0}
+                  animationDuration={800}
+                >
+                  {taskStatusData.filter(d => d.value > 0).map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex flex-col items-center justify-center h-[250px] text-muted-foreground">
+              <CheckCircle2 className="w-12 h-12 mb-3 opacity-50" />
+              <p className="text-sm">No tasks yet</p>
+              <p className="text-xs mt-1">Add tasks in the Planner to see your status</p>
+            </div>
+          )}
         </motion.div>
 
         {/* Energy Trend - Area Chart */}
@@ -539,7 +558,7 @@ export default function DashboardPage() {
           className="bg-gradient-to-br from-card to-card/50 border border-border rounded-xl p-6 shadow-lg"
         >
           <h3 className="text-lg font-semibold mb-4">Energy Trend (30 days)</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={energyChartData}>
               <defs>
                 <linearGradient id="energyGradient" x1="0" y1="0" x2="0" y2="1">
@@ -567,7 +586,7 @@ export default function DashboardPage() {
           <Lightbulb className="w-6 h-6 text-primary" />
           Insights
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <InsightCard
             id="mood-stability"
             title="Mood Stability"

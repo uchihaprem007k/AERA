@@ -10,7 +10,7 @@ interface AppState {
 // Load theme from localStorage on initialization
 const getStoredTheme = (): Theme => {
   if (typeof window === "undefined") return "system";
-  const stored = localStorage.getItem("aera-theme");
+  const stored = localStorage.getItem("heartlyte-theme");
   return (stored as Theme) || "system";
 };
 
@@ -18,7 +18,7 @@ export const useAppStore = create<AppState>((set) => ({
   theme: getStoredTheme(),
   setTheme: (theme) => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("aera-theme", theme);
+      localStorage.setItem("heartlyte-theme", theme);
     }
     set({ theme });
   },

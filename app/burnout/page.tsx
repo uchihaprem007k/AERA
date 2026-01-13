@@ -75,26 +75,26 @@ export default function BurnoutPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Burnout
           </h1>
-          <p className="text-muted-foreground">Understanding and managing your burnout risk</p>
+          <p className="text-muted-foreground text-sm sm:text-base">Understanding and managing your burnout risk</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setEditingBurnout(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl transition-all min-h-[44px] w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
-          Assess Risk
+          <span className="sm:inline">Assess Risk</span>
         </motion.button>
       </motion.div>
 
@@ -240,7 +240,7 @@ export default function BurnoutPage() {
         transition={{ delay: 0.4 }}
       >
         <h2 className="text-2xl font-semibold mb-4">Recovery Suggestions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {suggestions.map((suggestion, i) => {
             const Icon = suggestion.icon;
             return (

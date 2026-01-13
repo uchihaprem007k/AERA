@@ -25,13 +25,13 @@ export default function LifeSituationsPage() {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-4xl font-bold mb-2">Life Situations</h1>
-        <p className="text-muted-foreground">Understanding common human struggles and how to navigate them</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Life Situations</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">Understanding common human struggles and how to navigate them</p>
       </motion.div>
 
       {/* Filters */}
@@ -55,7 +55,7 @@ export default function LifeSituationsPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-lg border transition-colors ${
+            className={`px-4 py-2 rounded-lg border transition-colors min-h-[44px] ${
               !selectedCategory
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-card border-border text-foreground"
@@ -69,7 +69,7 @@ export default function LifeSituationsPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg border transition-colors ${
+              className={`px-4 py-2 rounded-lg border transition-colors min-h-[44px] ${
                 selectedCategory === category
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card border-border text-foreground"

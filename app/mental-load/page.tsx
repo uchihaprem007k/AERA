@@ -45,13 +45,13 @@ export default function MentalLoadPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-4xl font-bold mb-2">Mental Load</h1>
-        <p className="text-muted-foreground">Understanding your cognitive burden and mental pressure</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Mental Load</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">Understanding your cognitive burden and mental pressure</p>
       </motion.div>
 
       {/* Cognitive Load Meter */}
@@ -301,7 +301,7 @@ export default function MentalLoadPage() {
           <TrendingUp className="w-6 h-6 text-primary" />
           <h2 className="text-xl font-semibold">Contributing Factors</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
